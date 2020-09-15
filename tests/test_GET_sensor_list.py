@@ -8,6 +8,13 @@ def test_response_code():
     response = requests.get(BASE +"/sensor", headers=correct_header_1)
     assert response.status_code==200
 
+def test_response_content():
+    response = requests.get(BASE +"/sensor", headers=correct_header_1)
+    assert response.headers.get('content-type') == 'application/json'
+
+def test_response_code_no_auth():
+    response = requests.get(BASE +"/sensor")
+    assert response.status_code==401
 
 def test_response_code_unauth():
     response = requests.get(BASE +"/sensor", headers=incorrect_header_1)

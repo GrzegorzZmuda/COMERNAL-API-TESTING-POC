@@ -17,9 +17,10 @@ def test_response_types():
     response = requests.get(BASE +"/city", headers=correct_header_1)
     response_content=json.loads(response.content.decode())
     assert type(response_content) == list
-    assert type(response_content[0]["id"]) == int
-    assert type(response_content[0]["inhabitants"]) == int
-    assert type(response_content[0]["cityname"]) == str
+    for i in range(len(response_content)):
+        assert type(response_content[i]["id"]) == int
+        assert type(response_content[i]["inhabitants"]) == int
+        assert type(response_content[i]["cityname"]) == str
 
 
 

@@ -16,7 +16,7 @@ def get_cities_ids():
 cities_list=get_cities_ids()
 cities_list_len=len(cities_list)
 
-print(get_cities_ids())
+
 
 def gen_sensor_full():
     dict={

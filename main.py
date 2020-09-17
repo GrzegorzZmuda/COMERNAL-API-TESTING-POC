@@ -1,4 +1,5 @@
 from flask import Flask
+import datetime
 from flask_restful import Api
 from mainClasses.SensorData_in_City import SensorData_in_City
 from mainClasses.SensorDataList import SensorDataList
@@ -26,6 +27,29 @@ app.register_blueprint(bp)
 if not path.exists("database.db"):
     with app.test_request_context():
         db.create_all()
+        db.engine.execute("insert into city_model values(0,'first',34); ")
+        db.engine.execute("insert into city_model values(1,'second',34); ")
+        db.engine.execute("insert into city_model values(2,'third',34); ")
+        db.engine.execute("insert into sensor_model values(0,15,12.0,13.0,0); ")
+        db.engine.execute("insert into sensor_model values(1,15,12.0,13.0,0); ")
+        db.engine.execute("insert into sensor_model values(2,15,12.0,13.0,1); ")
+        db.engine.execute("insert into sensor_model values(3,15,12.0,13.0,1); ")
+        db.engine.execute("insert into sensor_model values(4,15,12.0,13.0,2); ")
+        db.engine.execute("insert into sensor_model values(5,15,12.0,13.0,2); ")
+        now = datetime.datetime.utcnow()
+        db.engine.execute("insert into sensor_data_model  values(0,15,'2020-09-09 14:11:14.151198',0); ")
+        db.engine.execute("insert into sensor_data_model  values(1,15,'2020-09-09 14:11:14.151198',0); ")
+        db.engine.execute("insert into sensor_data_model  values(2,15,'2020-09-09 14:11:14.151198',1); ")
+        db.engine.execute("insert into sensor_data_model  values(3,15,'2020-09-09 14:11:14.151198',1); ")
+        db.engine.execute("insert into sensor_data_model  values(4,15,'2020-09-09 14:11:14.151198',2); ")
+        db.engine.execute("insert into sensor_data_model  values(5,15,'2020-09-09 14:11:14.151198',2); ")
+        db.engine.execute("insert into sensor_data_model  values(6,15,'2020-09-09 14:11:14.151198',3); ")
+        db.engine.execute("insert into sensor_data_model  values(7,15,'2020-09-09 14:11:14.151198',3); ")
+        db.engine.execute("insert into sensor_data_model  values(8,15,'2020-09-09 14:11:14.151198',4); ")
+        db.engine.execute("insert into sensor_data_model  values(9,15,'2020-09-09 14:11:14.151198',4); ")
+        db.engine.execute("insert into sensor_data_model  values(10,15,'2020-09-09 14:11:14.151198',5); ")
+        db.engine.execute("insert into sensor_data_model  values(11,15,'2020-09-09 14:11:14.151198',5); ")
+
 
 #adresses
 api.add_resource(CitiesList,'/city')

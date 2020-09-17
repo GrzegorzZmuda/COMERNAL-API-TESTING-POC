@@ -9,7 +9,7 @@ from mainClasses.Sensor import Sensor
 from mainClasses.SensorsList import SensorsList
 from mainClasses.SensorData import SensorData
 from mainClasses.SensorData_in_Sensor import SensorData_in_Sensor
-from os import path
+from os import path,remove
 from Models.SensorDataModel import db
 from mainClasses.Sensors_in_City import Sensors_in_City
 
@@ -22,6 +22,10 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 from error_handlers import bp
 app.register_blueprint(bp)
+
+flag_test=True
+if flag_test and path.exists("database.db"):
+    remove("database.db")
 
 
 if not path.exists("database.db"):

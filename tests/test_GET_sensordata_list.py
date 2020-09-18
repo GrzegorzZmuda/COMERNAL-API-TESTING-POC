@@ -1,6 +1,6 @@
 import datetime
 import requests
-from auth_headers import correct_header_1,incorrect_header_1
+from API.auth_headers import correct_header_1,incorrect_header_1
 import json
 import pytest
 BASE = "http://127.0.0.1:5000/"

@@ -1,5 +1,5 @@
 import datetime
-from Models.SensorModel import db
+from API.Models.SensorModel import db
 
 
 class SensorDataModel(db.Model):

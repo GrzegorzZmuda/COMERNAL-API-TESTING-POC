@@ -1,4 +1,4 @@
-from Models.CityModel import db
+from API.Models.CityModel import db
 
 class SensorModel(db.Model):
     id = db.Column(db.Integer, primary_key = True)

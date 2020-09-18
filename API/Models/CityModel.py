@@ -1,5 +1,4 @@
-from flask_sqlalchemy import SQLAlchemy
-from db import db
+from API.Models.db import db
 
 class CityModel(db.Model):
     id = db.Column(db.Integer, primary_key = True)

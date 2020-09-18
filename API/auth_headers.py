@@ -1,6 +1,3 @@
-import pytest
-import requests
-from main import app
 from base64 import b64encode
 
 

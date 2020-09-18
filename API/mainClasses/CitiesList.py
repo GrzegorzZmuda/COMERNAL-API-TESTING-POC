@@ -1,9 +1,9 @@
 from flask_restful import Resource, abort, marshal_with
-from Models.CityModel import CityModel
-from Models.SensorDataModel import db
-from authentication import autheniticate
-from parsers import city_update_parser, city_post_parser
-from Resource_fields import resource_fields_city
+from API.Models.CityModel import CityModel
+from API.Models.SensorDataModel import db
+from API.authentication import autheniticate
+from API.parsers import city_update_parser, city_post_parser
+from API.Resource_fields import resource_fields_city
 
 city_post_args = city_post_parser()
 city_update_args =city_update_parser()

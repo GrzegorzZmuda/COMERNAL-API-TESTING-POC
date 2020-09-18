@@ -1,11 +1,9 @@
-import datetime
-from base64 import b64encode
 c=":"
 import requests
 import json
 import random
 import pytest
-from auth_headers import correct_header_1, incorrect_header_1
+from API.auth_headers import correct_header_1
 
 BASE = "http://127.0.0.1:5000/"
 

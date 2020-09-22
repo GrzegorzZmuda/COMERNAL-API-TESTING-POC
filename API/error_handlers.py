@@ -10,3 +10,7 @@ def not_found(error):
 @bp.app_errorhandler(500)
 def server_error(error):
     return  jsonify({"error": "server error"}), 500
+
+@bp.app_errorhandler(400)
+def server_error(error):
+    return  jsonify({"error": "bad request"}), 400

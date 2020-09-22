@@ -1,0 +1,69 @@
+---
+execution:
+- concurrency: 1
+  hold-for: 2m
+  ramp-up: 5s
+  scenario: TwoCheckout
+  throughput: 100
+scenarios:
+  TwoCheckout:
+    default-address: http://127.0.0.1:5000/
+    requests:
+    - body:
+        inhabitants: 334
+      headers:
+        Authorization: Basic dG9tOjMyMQ==
+        content-type: application/json
+      method: PUT
+      url: /city/1
+    - body:
+        height: 2
+      headers:
+        Authorization: Basic dG9tOjMyMQ==
+        content-type: application/json
+      method: PUT
+      url: /sensor/1
+    - body:
+        temperature: 31
+      headers:
+        Authorization: Basic dG9tOjMyMQ==
+        content-type: application/json
+      method: PUT
+      url: /sensordata/1
+    - assert:
+      - assume-success: true
+        contains:
+        - 404
+        subject: http-code
+      body:
+        inhabitants: 334
+      headers:
+        Authorization: Basic dG9tOjMyMQ==
+        content-type: application/json
+      method: PUT
+      url: /city/6666
+    - assert:
+      - assume-success: true
+        contains:
+        - 404
+        subject: http-code
+      body:
+        height: 2
+      headers:
+        Authorization: Basic dG9tOjMyMQ==
+        content-type: application/json
+      method: PUT
+      url: /sensor/6666
+    - assert:
+      - assume-success: true
+        contains:
+        - 404
+        subject: http-code
+      body:
+        temperature: 31
+      headers:
+        Authorization: Basic dG9tOjMyMQ==
+        content-type: application/json
+      method: PUT
+      url: /sensordata/66666
+

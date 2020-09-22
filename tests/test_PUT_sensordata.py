@@ -201,14 +201,4 @@ def test_response_msg_type_empty_temperature_field(id=2):
     response_content = json.loads(response.content.decode())
 
     assert type(response_content["message"]) == str
-@pytest.mark.run(order=1)
-def test_response_msg_empty_temperature_field(id=2):
-    correct_header_1_upg = {'Authorization': correct_header_1['Authorization'], 'Content-Type': 'application/json'}
-    temp = str({'temperature': 37, 'sensor_id': 108}).replace("\'", "\"")
-    reqstr = temp[0:15] + temp[18:]
 
-
-    response = requests.put(BASE +"/sensordata/"+str(id),data=reqstr,headers=correct_header_1_upg)
-    response_content = json.loads(response.content.decode())
-
-    assert "Failed to decode JSON object: " in response_content["message"]

@@ -127,17 +127,6 @@ def test_response_inside_content_correct_message_str_as_inhabitants(id=2):
     print(response_content["message"])
     assert response_content["message"]["inhabitants"] in "Number of inhabitants required"
 
-@pytest.mark.run(order=2)
-def test_response_inside_content_correct_message_empty_inhabitants_field(id=2):
-    correct_header_1_upg = {'Authorization': correct_header_1['Authorization'], 'Content-Type': 'application/json'}
-
-
-    temp=str({"cityname": "nadezane", "inhabitants": 5274}).replace("\'","\"")
-    reqstr=temp[0:40]+temp[-1]
-    response = requests.put(BASE +"/city/"+str(id),data=reqstr,headers=correct_header_1_upg)
-    response_content = json.loads(response.content.decode())
-    print(response_content)
-    assert "Failed to decode JSON object:" in response_content["message"]
 
 @pytest.mark.run(order=2)
 def test_response_inside_content_correct_message_type_empty_inhabitants_field(id=2):

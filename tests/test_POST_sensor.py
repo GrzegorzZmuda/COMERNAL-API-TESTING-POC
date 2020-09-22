@@ -178,14 +178,3 @@ def test_response_msg_type_empty_height_field():
     response_content = json.loads(response.content.decode())
     print(reqstr)
     assert type(response_content["message"]) == str
-@pytest.mark.run(order=1)
-def test_response_msg_empty_height_field():
-    correct_header_1_upg = {'Authorization': correct_header_1['Authorization'], 'Content-Type': 'application/json'}
-    temp = str({'height': 30, 'latitude': -1.622, 'longitude': 99.369, 'city_id': 106}).replace("\'", "\"")
-    reqstr = temp[0:8] + temp[15:]
-
-
-    response = requests.post(BASE +"/sensor",data=reqstr,headers=correct_header_1_upg)
-    response_content = json.loads(response.content.decode())
-    print(response_content)
-    assert "Failed to decode JSON object: " in response_content["message"]

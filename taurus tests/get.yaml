@@ -1,0 +1,135 @@
+execution:
+- concurrency: 1
+  ramp-up: 5s
+  hold-for: 2m
+  throughput: 100
+  scenario: TwoCheckout
+
+
+
+scenarios:
+  TwoCheckout:
+    default-address: http://127.0.0.1:5000/
+    requests:
+
+      - url: /city
+        method: GET
+        headers:
+          content-type: application/json
+          Authorization: "Basic dG9tOjMyMQ=="
+
+      - url: /city/1
+        method: GET
+        headers:
+          content-type: application/json
+          Authorization: "Basic dG9tOjMyMQ=="
+
+      - url: /sensor
+        method: GET
+        headers:
+          content-type: application/json
+          Authorization: "Basic dG9tOjMyMQ=="
+
+      - url: /sensor/1
+        method: GET
+        headers:
+          content-type: application/json
+          Authorization: "Basic dG9tOjMyMQ=="
+
+      - url: /sensordata
+        method: GET
+        headers:
+          content-type: application/json
+          Authorization: "Basic dG9tOjMyMQ=="
+
+      - url: /sensordata/1
+        method: GET
+        headers:
+          content-type: application/json
+          Authorization: "Basic dG9tOjMyMQ=="
+
+      - url: /city/1/sensor
+        method: GET
+        headers:
+          content-type: application/json
+          Authorization: "Basic dG9tOjMyMQ=="
+
+      - url: /city/1/sensor/sensordata
+        method: GET
+        headers:
+          content-type: application/json
+          Authorization: "Basic dG9tOjMyMQ=="
+
+      - url: /sensor/1/sensordata
+        method: GET
+        headers:
+          content-type: application/json
+          Authorization: "Basic dG9tOjMyMQ=="
+
+# check 404
+      - url: /city/6666
+        method: GET
+        headers:
+          content-type: application/json
+          Authorization: "Basic dG9tOjMyMQ=="
+        assert:
+          - assume-success: true
+            contains:
+              - 404
+            subject: http-code
+
+      - url: /sensor/6666
+        method: GET
+        headers:
+          content-type: application/json
+          Authorization: "Basic dG9tOjMyMQ=="
+        assert:
+          - assume-success: true
+            contains:
+              - 404
+            subject: http-code
+
+      - url: /sensordata/66666
+        method: GET
+        headers:
+          content-type: application/json
+          Authorization: "Basic dG9tOjMyMQ=="
+        assert:
+          - assume-success: true
+            contains:
+              - 404
+            subject: http-code
+
+      - url: /city/6666/sensor
+        method: GET
+        headers:
+          content-type: application/json
+          Authorization: "Basic dG9tOjMyMQ=="
+        assert:
+          - assume-success: true
+            contains:
+              - 404
+            subject: http-code
+
+      - url: /city/66661/sensor/sensordata
+        method: GET
+        headers:
+          content-type: application/json
+          Authorization: "Basic dG9tOjMyMQ=="
+        assert:
+          - assume-success: true
+            contains:
+              - 404
+            subject: http-code
+
+      - url: /sensor/6661/sensordata
+        method: GET
+        headers:
+          content-type: application/json
+          Authorization: "Basic dG9tOjMyMQ=="
+        assert:
+          - assume-success: true
+            contains:
+              - 404
+            subject: http-code
+

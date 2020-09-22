@@ -75,4 +75,4 @@ api.add_resource(SensorData_in_City,
 
 #run server (debug)
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)

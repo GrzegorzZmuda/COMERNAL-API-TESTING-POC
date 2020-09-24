@@ -25,11 +25,12 @@ def get_sensors_ids():
     for i in range(len(response_content)):
         ls.append(response_content[i]["id"])
     return ls
-sensors_list=get_sensors_ids()
-sensors_list_len=len(sensors_list)
+
 
 
 def gen_sensordata_full():
+    sensors_list = get_sensors_ids()
+    sensors_list_len = len(sensors_list)
     dict={
         "temperature": random.randrange(1,70),
         "measurement_datetime": datetime.datetime.isoformat(datetime.datetime.now()- datetime.timedelta(seconds=random.randrange(0,100000000))),
@@ -38,6 +39,8 @@ def gen_sensordata_full():
     return dict
 
 def gen_sensordata_full_without_date():
+    sensors_list = get_sensors_ids()
+    sensors_list_len = len(sensors_list)
     dict={
         "temperature": random.randrange(1,70),
         "sensor_id": sensors_list[random.randrange(sensors_list_len)]
@@ -45,6 +48,8 @@ def gen_sensordata_full_without_date():
     return dict
 
 def gen_sensordata_without_temperature():
+    sensors_list = get_sensors_ids()
+    sensors_list_len = len(sensors_list)
     dict={
         "measurement_datetime": datetime.datetime.isoformat(
             datetime.datetime.now() - datetime.timedelta(seconds=random.randrange(0, 100000000))),
@@ -53,6 +58,8 @@ def gen_sensordata_without_temperature():
     return dict
 
 def gen_sensordata_sensot_not_exist():
+    sensors_list = get_sensors_ids()
+    sensors_list_len = len(sensors_list)
     dict={
         "temperature": random.randrange(1,70),
         "measurement_datetime": datetime.datetime.isoformat(datetime.datetime.now()- datetime.timedelta(seconds=random.randrange(0,100000000))),

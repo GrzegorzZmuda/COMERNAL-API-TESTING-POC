@@ -30,6 +30,8 @@ cities_list_len=len(cities_list)
 
 
 def gen_sensor_full():
+    cities_list = get_cities_ids()
+    cities_list_len = len(cities_list)
     dict={
         "height": random.randrange(1,70),
         "latitude": random.randrange(-90000,90000)/1000,
@@ -39,6 +41,8 @@ def gen_sensor_full():
     return dict
 
 def gen_sensor_no_longitude():
+    cities_list = get_cities_ids()
+    cities_list_len = len(cities_list)
     dict={
         "height": random.randrange(1,70),
         "latitude": random.randrange(-90000,90000)/1000,
@@ -47,6 +51,8 @@ def gen_sensor_no_longitude():
     return dict
 
 def gen_sensor_city_not_exist():
+    cities_list = get_cities_ids()
+    cities_list_len = len(cities_list)
     dict={
         "height": random.randrange(1,70),
         "latitude": random.randrange(-90000,90000)/1000,
@@ -151,7 +157,7 @@ def test_POST_sensor_response_cotent_msg_wrong_city_id():
 @pytest.mark.run(order=1)
 def test_POST_sensor_response_cotent_correct_check_types():
     a=gen_sensor_full()
-    response = requests.post(BASE +"/sensor",gen_sensor_full() ,headers=correct_header_1)
+    response = requests.post(BASE +"/sensor",a ,headers=correct_header_1)
     response_content = json.loads(response.content.decode())
     print(a,response_content)
     assert type(response_content["id"])== int

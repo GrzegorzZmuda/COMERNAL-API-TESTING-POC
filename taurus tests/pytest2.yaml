@@ -3,9 +3,6 @@ modules:
     interpreter: C:\Users\lordb\PycharmProjects\untitled2\venv\venv\Scripts\python.exe
 execution:
 - executor: pytest
-  concurrency: 1
-  ramp-up: 5s
-  hold-for: 2m
-  throughput: 100
+  iterations: 100
   scenario:
     script: tests/ #test_PUT_city_taurus.py

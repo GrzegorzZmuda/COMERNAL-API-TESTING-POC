@@ -1,6 +1,6 @@
 import requests
 import random
-from API.auth_headers import correct_header_1
+from api.auth_headers import correct_header_1
 
 BASE = "http://127.0.0.1:5000/"
 

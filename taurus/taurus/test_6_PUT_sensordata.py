@@ -36,14 +36,14 @@ def gen_sensordata_full():
     dict={
         "temperature": random.randrange(1,70),
         "measurement_datetime": datetime.datetime.isoformat(datetime.datetime.now()- datetime.timedelta(seconds=random.randrange(0,100000000))),
-        "sensor_id": sensors_list[random.randrange(sensors_list_len)]
+        "sensor_id": 2
     }
     return dict
 
 def gen_sensordata_full_without_date():
     dict={
         "temperature": random.randrange(1,70),
-        "sensor_id": sensors_list[random.randrange(sensors_list_len)]
+        "sensor_id": 2
     }
     return dict
 
@@ -51,7 +51,7 @@ def gen_sensordata_without_temperature():
     dict={
         "measurement_datetime": datetime.datetime.isoformat(
             datetime.datetime.now() - datetime.timedelta(seconds=random.randrange(0, 100000000))),
-        "sensor_id": sensors_list[random.randrange(sensors_list_len)]
+        "sensor_id": 2
     }
     return dict
 
@@ -59,64 +59,64 @@ def gen_sensordata_sensot_not_exist():
     dict={
         "temperature": random.randrange(1,70),
         "measurement_datetime": datetime.datetime.isoformat(datetime.datetime.now()- datetime.timedelta(seconds=random.randrange(0,100000000))),
-        "sensor_id": max(sensors_list)+20
+        "sensor_id": max(sensors_list)+202222
     }
     return dict
 
 
-@pytest.mark.run(order=1)
+
 def test_PUT_sensordata_response_code(id=2):
     response = requests.put(BASE +"/sensordata/"+str(id),gen_sensordata_full() ,headers=correct_header_1)
     assert response.status_code==200
-@pytest.mark.run(order=1)
+
 def test_PUT_sensordata_response_code_without_date(id=2):
     response = requests.put(BASE +"/sensordata/"+str(id),gen_sensordata_full_without_date() ,headers=correct_header_1)
     assert response.status_code==200
-@pytest.mark.run(order=1)
+
 def test_PUT_sensordata_response_code_without_temperature(id=2):
     response = requests.put(BASE +"/sensordata/"+str(id),gen_sensordata_without_temperature() ,headers=correct_header_1)
     assert response.status_code==200
-@pytest.mark.run(order=1)
+
 def test_PUT_sensordata_response_code_no_auth(id=2):
     response = requests.put(BASE +"/sensordata/"+str(id),gen_sensordata_full() )
     assert response.status_code==401
-@pytest.mark.run(order=1)
+
 def test_PUT_sensordata_response_code_unauth(id=2):
     response = requests.put(BASE +"/sensordata/"+str(id),gen_sensordata_full() ,headers=incorrect_header_1)
     assert response.status_code==401
-@pytest.mark.run(order=1)
+
 def test_PUT_sensordata_response_code_no_sensor(id=2):
     response = requests.put(BASE +"/sensordata/"+str(id),gen_sensordata_sensot_not_exist() ,headers=correct_header_1)
     assert response.status_code==404
 
 
-@pytest.mark.run(order=1)
+
 def test_PUT_sensordata_response_content(id=2):
     response = requests.put(BASE +"/sensordata/"+str(id),gen_sensordata_full() ,headers=correct_header_1)
     assert response.headers.get('content-type') == 'application/json'
-@pytest.mark.run(order=1)
+
 def test_PUT_sensordata_response_content_without_date(id=2):
     response = requests.put(BASE +"/sensordata/"+str(id),gen_sensordata_full_without_date() ,headers=correct_header_1)
     assert response.headers.get('content-type') == 'application/json'
-@pytest.mark.run(order=1)
+
 def test_PUT_sensordata_response_content_without_temperature(id=2):
     response = requests.put(BASE +"/sensordata/"+str(id),gen_sensordata_without_temperature() ,headers=correct_header_1)
     assert response.headers.get('content-type') == 'application/json'
-@pytest.mark.run(order=1)
+
 def test_PUT_sensordata_response_content_no_auth(id=2):
     response = requests.put(BASE +"/sensordata/"+str(id),gen_sensordata_full() )
     assert  'text/html' in response.headers.get('content-type')
-@pytest.mark.run(order=1)
+
 def test_PUT_sensordata_response_content_unauth(id=2):
     response = requests.put(BASE +"/sensordata/"+str(id),gen_sensordata_full() ,headers=incorrect_header_1)
     assert  'text/html' in response.headers.get('content-type')
-@pytest.mark.run(order=1)
+
 def test_PUT_sensordata_response_content_no_sensor(id=2):
     response = requests.put(BASE +"/sensordata/"+str(id),gen_sensordata_sensot_not_exist() ,headers=correct_header_1)
     assert  'application/json' in response.headers.get('content-type')
 
 
-@pytest.mark.run(order=1)
+
 def test_PUT_sensordata_response_content_msg(id=2):
     a=gen_sensordata_full()
     response = requests.put(BASE +"/sensordata/"+str(id),a,headers=correct_header_1)
@@ -124,7 +124,7 @@ def test_PUT_sensordata_response_content_msg(id=2):
     assert response_content["temperature"] == a["temperature"]
     assert response_content["measurement_datetime"],'%a, %d %b %Y %X %z' == a["measurement_datetime"]
     assert response_content["sensor_id"] == a["sensor_id"]
-@pytest.mark.run(order=1)
+
 def test_PUT_sensordata_response_content_msg_without_date(id=2):
     a =gen_sensordata_full_without_date()
     response = requests.put(BASE +"/sensordata/"+str(id),a ,headers=correct_header_1)
@@ -132,17 +132,17 @@ def test_PUT_sensordata_response_content_msg_without_date(id=2):
     assert response_content["temperature"] == a["temperature"]
     assert response_content["sensor_id"] == a["sensor_id"]
 
-@pytest.mark.run(order=1)
+
 def test_PUT_sensordata_response_content_msg_no_auth(id=2):
     response = requests.put(BASE +"/sensordata/"+str(id),gen_sensordata_full() )
     response_content = response.content.decode()
     assert response_content=="Unauthorised"
-@pytest.mark.run(order=1)
+
 def test_PUT_sensordata_response_content_msg_unauth(id=2):
     response = requests.put(BASE +"/sensordata/"+str(id),gen_sensordata_full() ,headers=incorrect_header_1)
     response_content = response.content.decode()
     assert response_content=="Unauthorised"
-@pytest.mark.run(order=1)
+
 def test_PUT_sensordata_response_content_msg_no_sensor(id=2):
     response = requests.put(BASE +"/sensordata/"+str(id),gen_sensordata_sensot_not_exist() ,headers=correct_header_1)
     response_content = json.loads(response.content.decode())
@@ -156,7 +156,7 @@ def test_PUT_sensordata_response_content_msg_no_sensor(id=2):
 
 
 
-@pytest.mark.run(order=1)
+
 def test_PUT_sensordata_response_content_msg_type(id=2):
     response = requests.put(BASE + "/sensordata/"+str(id), gen_sensordata_full(), headers=correct_header_1)
     response_content = json.loads(response.content.decode())
@@ -166,7 +166,7 @@ def test_PUT_sensordata_response_content_msg_type(id=2):
         datetime.datetime.strptime(response_content["measurement_datetime"], '%a, %d %b %Y %X %z')) == datetime.datetime
     assert type(response_content["sensor_id"]) == int
 
-@pytest.mark.run(order=1)
+
 def test_PUT_sensordata_response_content_msg_type_without_date(id=2):
     response = requests.put(BASE + "/sensordata/"+str(id), gen_sensordata_full_without_date(), headers=correct_header_1)
     response_content = json.loads(response.content.decode())
@@ -176,23 +176,23 @@ def test_PUT_sensordata_response_content_msg_type_without_date(id=2):
         datetime.datetime.strptime(response_content["measurement_datetime"], '%a, %d %b %Y %X %z')) == datetime.datetime
     assert type(response_content["sensor_id"]) == int
 
-@pytest.mark.run(order=1)
+
 def test_PUT_sensordata_response_content_msg_type_no_auth(id=2):
     response = requests.put(BASE +"/sensordata/"+str(id),gen_sensordata_full() )
     response_content = response.content.decode()
     assert type(response_content)==str
-@pytest.mark.run(order=1)
+
 def test_PUT_sensordata_response_content_msg_type_unauth(id=2):
     response = requests.put(BASE +"/sensordata/"+str(id),gen_sensordata_full() ,headers=incorrect_header_1)
     response_content = response.content.decode()
     assert type(response_content)==str
-@pytest.mark.run(order=1)
+
 def test_PUT_sensordata_response_content_msg_type_no_sensor(id=2):
     response = requests.put(BASE +"/sensordata/"+str(id),gen_sensordata_sensot_not_exist() ,headers=correct_header_1)
     response_content = json.loads(response.content.decode())
     assert type(response_content["message"]) ==str
 
-@pytest.mark.run(order=1)
+
 def test_PUT_sensordata_response_code_empty_temperature_field(id=2):
     correct_header_1_upg = {'Authorization': correct_header_1['Authorization'], 'Content-Type': 'application/json'}
     temp = str({'temperature': 37, 'sensor_id': 108}).replace("\'", "\"")
@@ -202,7 +202,7 @@ def test_PUT_sensordata_response_code_empty_temperature_field(id=2):
     response = requests.put(BASE +"/sensordata/"+str(id),data=reqstr,headers=correct_header_1_upg)
 
     assert response.status_code==400
-@pytest.mark.run(order=1)
+
 def test_PUT_sensordata_response_msg_type_empty_temperature_field(id=2):
     correct_header_1_upg = {'Authorization': correct_header_1['Authorization'], 'Content-Type': 'application/json'}
     temp = str({'temperature': 37, 'sensor_id': 108}).replace("\'", "\"")

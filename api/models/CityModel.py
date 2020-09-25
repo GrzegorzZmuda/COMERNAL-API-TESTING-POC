@@ -1,4 +1,4 @@
-from API.Models.db import db
+from api.models.db_init import db
 
 class CityModel(db.Model):
     id = db.Column(db.Integer, primary_key = True)

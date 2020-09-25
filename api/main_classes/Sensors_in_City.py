@@ -1,8 +1,8 @@
 from flask_restful import Resource, abort, marshal_with
-from API.Models.SensorModel import SensorModel
-from API.authentication import autheniticate
-from API.parsers import sensor_post_parser, sensor_update_parser
-from API.Resource_fields import resource_fields_sensor
+from api.models.SensorModel import SensorModel
+from api.authentication import autheniticate
+from api.parsers import sensor_post_parser, sensor_update_parser
+from api.resource_fields import resource_fields_sensor
 
 sensor_post_args = sensor_post_parser()
 sensor_update_args = sensor_update_parser()

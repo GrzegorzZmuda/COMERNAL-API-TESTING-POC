@@ -37,7 +37,7 @@ def gen_sensor_full():
         "height": random.randrange(1,70),
         "latitude": random.randrange(-90000,90000)/1000,
         "longitude": random.randrange(-180000,180000)/1000,
-        "city_id": cities_list[random.randrange(cities_list_len)]
+        "city_id": 2
     }
     return dict
 
@@ -45,7 +45,7 @@ def gen_sensor_no_longitude():
     dict={
         "height": random.randrange(1,70),
         "latitude": random.randrange(-90000,90000)/1000,
-        "city_id": cities_list[random.randrange(cities_list_len)]
+        "city_id": 2
     }
     return dict
 
@@ -54,7 +54,7 @@ def gen_sensor_city_not_exist():
         "height": random.randrange(1,70),
         "latitude": random.randrange(-90000,90000)/1000,
         "longitude": random.randrange(-180000,180000)/1000,
-        "city_id": max(cities_list)+12
+        "city_id": max(cities_list)+1222222
     }
     return dict
 #responses

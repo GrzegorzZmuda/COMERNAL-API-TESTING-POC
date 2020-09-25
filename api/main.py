@@ -1,17 +1,18 @@
 from flask import Flask
 import datetime
 from flask_restful import Api
-from API.mainClasses.SensorData_in_City import SensorData_in_City
-from API.mainClasses.SensorDataList import SensorDataList
-from API.mainClasses.CitiesList import CitiesList
-from API.mainClasses.City import City
-from API.mainClasses.Sensor import Sensor
-from API.mainClasses.SensorsList import SensorsList
-from API.mainClasses.SensorData import SensorData
-from API.mainClasses.SensorData_in_Sensor import SensorData_in_Sensor
+from api.main_classes.SensorData_in_City import SensorData_in_City
+from api.main_classes.SensorDataList import SensorDataList
+from api.main_classes.CitiesList import CitiesList
+from api.main_classes.City import City
+from api.main_classes.Sensor import Sensor
+from api.main_classes.SensorsList import SensorsList
+from api.main_classes.SensorData import SensorData
+from api.main_classes.SensorData_in_Sensor import SensorData_in_Sensor
 from os import path,remove
-from API.Models.SensorDataModel import db
-from API.mainClasses.Sensors_in_City import Sensors_in_City
+from api.models.SensorDataModel import db
+from api.main_classes.Sensors_in_City import Sensors_in_City
+from flask import request
 
 
 #starting Flask and config
@@ -20,14 +21,15 @@ api= Api(app)
 app.config['SQLALCHEMY_DATABASE_URI'] ='sqlite:///database.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
-from API.error_handlers import bp
+from api.error_handlers import bp
 app.register_blueprint(bp)
 
+#True if you want to reset database
 flag_test=True
-if flag_test and path.exists("API/database.db"):
-    remove("API/database.db")
+if flag_test and path.exists("api/database.db"):
+    remove("api/database.db")
 
-if not path.exists("API/database.db"):
+if not path.exists("api/database.db"):
     with app.test_request_context():
         db.create_all()
         db.engine.execute("insert into city_model values(0,'first',34); ")

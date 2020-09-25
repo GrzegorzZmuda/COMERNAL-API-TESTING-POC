@@ -1,6 +1,6 @@
-modules:
-  pytest:
-    interpreter: C:\Users\lordb\PycharmProjects\untitled2\venv\venv\Scripts\python.exe
+#modules:
+#  pytest:
+#    interpreter: Set path for taurus if needed
 
 
 
